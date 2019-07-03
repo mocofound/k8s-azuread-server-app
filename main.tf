@@ -3,6 +3,10 @@ provider "azuread" {
   #version = "=0.3.0"
 }
 
+#ToDo Maybe: az ad app permission grant --id $serverApplicationId --api 00000003-0000-0000-c000-000000000000
+#ToDo Probably: az ad app permission admin-consent --id  $serverApplicationId
+#https://docs.microsoft.com/en-us/azure/aks/azure-ad-integration-cli
+#https://docs.microsoft.com/en-us/azure/aks/azure-ad-integration
 
 resource "azuread_application" "server" {
   name                       = "k8s azuread rbac server app"
@@ -31,7 +35,7 @@ resource "azuread_application" "server" {
       type = "Scope"
     }
   }
-/*
+
   required_resource_access {
     resource_app_id = "00000002-0000-0000-c000-000000000000"
 
@@ -40,18 +44,30 @@ resource "azuread_application" "server" {
       type = "Scope"
     }
   }
+  
+/*
+oAuthPermissionId=$(az ad app show --id $serverApplicationId --query "oauth2Permissions[0].id" -o tsv)
+Add the permissions for the client application and server application components to use the oAuth2 communication flow using the az ad app permission add command. Then, grant permissions for the client application to communication with the server application using the az ad app permission grant command:
+
+Azure CLI
+
+Copy
+
+Try It
+az ad app permission add --id $clientApplicationId --api $serverApplicationId --api-permissions $oAuthPermissionId=Scope
+az ad app permission grant --id $clientApplicationId --api $serverApplicationId
   */
 }
 
 resource "azuread_application" "client" {
   name                       = "k8s azuread rbac server app"
-  homepage                   = "https://myakssclient"
+  #homepage                   = "https://myakssclient"
   #identifier_uris            = ["https://myaksclient"]
   reply_urls                 = ["https://replyurlclient"]
-  available_to_other_tenants = false
-  oauth2_allow_implicit_flow = true
+  #available_to_other_tenants = false
+  #oauth2_allow_implicit_flow = true
   type                       = "native"
-
+/*
   required_resource_access {
     resource_app_id = "00000003-0000-0000-c000-000000000000"
 
@@ -69,7 +85,8 @@ resource "azuread_application" "client" {
       type = "Scope"
     }
   }
-/*
+  
+
   required_resource_access {
     resource_app_id = "00000002-0000-0000-c000-000000000000"
 
@@ -83,6 +100,10 @@ resource "azuread_application" "client" {
 
 resource "azuread_service_principal" "server" {
   application_id = "${azuread_application.server.application_id}"
+}
+
+resource "azuread_service_principal" "client" {
+  application_id = "${azuread_application.client.application_id}"
 }
 
 resource "azuread_service_principal_password" "server" {
