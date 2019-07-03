@@ -21,7 +21,7 @@ resource "azuread_application" "server" {
       type = "Role"
     }
     resource_access {
-      id = ".e1fe6dd8-ba31-4d61-89e7-88639da4683d"
+      id = "e1fe6dd8-ba31-4d61-89e7-88639da4683d"
       type = "Scope"
     }
 
@@ -30,7 +30,7 @@ resource "azuread_application" "server" {
       type = "Scope"
     }
   }
-
+/*
   required_resource_access {
     resource_app_id = "00000002-0000-0000-c000-000000000000"
 
@@ -39,6 +39,7 @@ resource "azuread_application" "server" {
       type = "Scope"
     }
   }
+  */
 }
 
 resource "azuread_application" "client" {
@@ -58,7 +59,7 @@ resource "azuread_application" "client" {
       type = "Role"
     }
     resource_access {
-      id = ".e1fe6dd8-ba31-4d61-89e7-88639da4683d"
+      id = "e1fe6dd8-ba31-4d61-89e7-88639da4683d"
       type = "Scope"
     }
 
@@ -67,7 +68,7 @@ resource "azuread_application" "client" {
       type = "Scope"
     }
   }
-
+/*
   required_resource_access {
     resource_app_id = "00000002-0000-0000-c000-000000000000"
 
@@ -76,4 +77,5 @@ resource "azuread_application" "client" {
       type = "Scope"
     }
   }
+  */
 }
