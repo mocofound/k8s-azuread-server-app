@@ -149,8 +149,8 @@ resource "azurerm_kubernetes_cluster" "k8sexample" {
   }
 
   service_principal {
-    client_id     = TF_VAR_ARM_CLIENT_ID
-    client_secret = TF_VAR_ARM_CLIENT_SECRET
+    client_id     = "${var.client_id}"
+    client_secret = "${var.client_secret}"
   }
 
   tags {
@@ -160,9 +160,9 @@ resource "azurerm_kubernetes_cluster" "k8sexample" {
     enabled = true
     azure_active_directory {
             server_app_id     = "${azuread_application.server.application_id}"
-            server_app_secret = var.azuread_service_principal_password_string
+            server_app_secret = "${var.azuread_service_principal_password_string}"
             client_app_id     = "${azuread_application.client.application_id}"
-            tenant_id         = TF_VAR_ARM_TENANT_ID
+            tenant_id         = "${var.tenant_id}"
     }
   }
 }
