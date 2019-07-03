@@ -10,7 +10,7 @@ provider "azuread" {
 
 
 resource "azuread_application" "server" {
-  name                       = "k8s azuread rbac server app"
+  name                       = "k8s-azuread-rbac-server-app"
   homepage                   = "https://myaksserver"
   identifier_uris            = ["https://myaksserver"]
   reply_urls                 = ["https://replyurlserver"]
