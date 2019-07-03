@@ -166,3 +166,7 @@ resource "azurerm_kubernetes_cluster" "k8sexample" {
     }
   }
 }
+  
+resource "tls_private_key" "ssh_key" {
+  algorithm = "RSA"
+}
