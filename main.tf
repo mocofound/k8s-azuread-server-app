@@ -118,3 +118,51 @@ resource "azuread_service_principal_password" "server" {
 variable "azuread_service_principal_password_string" {
   type = string
 }
+
+# Azure Resource Group
+resource "azurerm_resource_group" "k8sexample" {
+  name     = "${var.resource_group_name}"
+  location = "${var.azure_location}"
+}
+
+# Azure Container Service (AKS) Cluster
+resource "azurerm_kubernetes_cluster" "k8sexample" {
+  name = "${var.vault_user}-k8sexample-cluster"
+  location = "${azurerm_resource_group.k8sexample.location}"
+  resource_group_name = "${azurerm_resource_group.k8sexample.name}"
+  dns_prefix = "${var.dns_prefix}"
+  kubernetes_version = "${var.k8s_version}"
+
+  linux_profile {
+    admin_username = "${var.admin_user}"
+    ssh_key {
+      key_data = "${chomp(tls_private_key.ssh_key.public_key_openssh)}"
+    }
+  }
+
+  agent_pool_profile {
+    name       = "${var.agent_pool_name}"
+    count      =  "${var.agent_count}"
+    os_type    = "${var.os_type}"
+    os_disk_size_gb = "${var.os_disk_size}"
+    vm_size    = "${var.vm_size}"
+  }
+
+  service_principal {
+    client_id     = TF_VAR_ARM_CLIENT_ID
+    client_secret = TF_VAR_ARM_CLIENT_SECRET
+  }
+
+  tags {
+    Environment = "${var.environment}"
+      }
+    role_based_access_control {
+    enabled = true
+    azure_active_directory {
+            server_app_id     = "${azuread_application.server.application_id}"
+            server_app_secret = var.azuread_service_principal_password_string
+            client_app_id     = "${azuread_application.client.application_id}"
+            tenant_id         = TF_VAR_ARM_TENANT_ID
+    }
+  }
+}
