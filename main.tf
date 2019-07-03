@@ -80,3 +80,17 @@ resource "azuread_application" "client" {
   }
   */
 }
+
+resource "azuread_service_principal" "server" {
+  application_id = "${azuread_application.server.application_id}"
+}
+
+resource "azuread_service_principal_password" "server" {
+  service_principal_id = "${azuread_service_principal.server.id}"
+  value                = var.azuread_service_principal_password_string
+  end_date             = "2020-01-01T01:02:03Z"
+}
+
+variable "azuread_service_principal_password_string" {
+  type = string
+}
