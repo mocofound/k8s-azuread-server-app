@@ -17,7 +17,7 @@ resource "azuread_application" "server" {
   available_to_other_tenants = false
   oauth2_allow_implicit_flow = true
   type                       = "webapp/api"
-  #group_membership_claims    = "All"
+  group_membership_claims    = "All"
 
   /*
   required_resource_access {
