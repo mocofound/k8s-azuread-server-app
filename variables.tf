@@ -9,6 +9,7 @@ variable "azure_location" {
 
 variable "dns_prefix" {
   description = "DNS prefix for your cluster"
+  default = "k8s-"
 }
 
 variable "k8s_version" {
@@ -53,8 +54,4 @@ variable "environment" {
 
 variable "vault_user" {
   description = "Vault userid: determines location of secrets and affects path of k8s auth backend that is created in the associated k8s-vault-config workspace"
-}
-
-variable "vault_addr" {
-  description = "Address of Vault server including port that is used in the associated k8s-vault-config and k8s-services workspaces"
 }
