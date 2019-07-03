@@ -19,7 +19,7 @@ resource "azuread_application" "server" {
   type                       = "webapp/api"
   group_membership_claims    = "All"
 
-  /*
+  
   required_resource_access {
     resource_app_id = "00000003-0000-0000-c000-000000000000"
 
@@ -37,7 +37,7 @@ resource "azuread_application" "server" {
       type = "Scope"
     }
   }
-    /*
+   
 /*
   required_resource_access {
     resource_app_id = "00000002-0000-0000-c000-000000000000"
