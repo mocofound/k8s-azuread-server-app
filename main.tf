@@ -46,11 +46,11 @@ resource "azuread_application" "server" {
 resource "azuread_application" "client" {
   name                       = "k8s azuread rbac server app"
   homepage                   = "https://myakssclient"
-  identifier_uris            = ["https://myaksclient"]
+  #identifier_uris            = ["https://myaksclient"]
   reply_urls                 = ["https://replyurlclient"]
   available_to_other_tenants = false
   oauth2_allow_implicit_flow = true
-  type                       = "webapp/api"
+  type                       = "native"
 
   required_resource_access {
     resource_app_id = "00000003-0000-0000-c000-000000000000"
