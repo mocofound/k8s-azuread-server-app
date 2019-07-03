@@ -63,3 +63,7 @@ variable "client_id" {
 variable "secret_id" {
   description = "Vault userid: determines location of secrets and affects path of k8s auth backend that is created in the associated k8s-vault-config workspace"
 }
+
+variable "tenant_id" {
+  description = "Vault userid: determines location of secrets and affects path of k8s auth backend that is created in the associated k8s-vault-config workspace"
+}
