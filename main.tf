@@ -8,6 +8,7 @@ provider "azuread" {
 #https://docs.microsoft.com/en-us/azure/aks/azure-ad-integration-cli
 #https://docs.microsoft.com/en-us/azure/aks/azure-ad-integration
 
+
 resource "azuread_application" "server" {
   name                       = "k8s azuread rbac server app"
   homepage                   = "https://myaksserver"
@@ -35,6 +36,7 @@ resource "azuread_application" "server" {
       type = "Scope"
     }
   }
+  
 /*
   required_resource_access {
     resource_app_id = "00000002-0000-0000-c000-000000000000"
@@ -87,16 +89,16 @@ resource "azuread_application" "client" {
     }
   }
   
-
+  */
   required_resource_access {
-    resource_app_id = "00000002-0000-0000-c000-000000000000"
+    resource_app_id = "${azuread_application.server.application_id}"
 
     resource_access {
-      id = "..."
+      id = "${azuread_application.server.oauth2_permissions[0].id}"
       type = "Scope"
     }
   }
-  */
+
 }
 
 resource "azuread_service_principal" "server" {
