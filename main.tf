@@ -35,7 +35,7 @@ resource "azuread_application" "server" {
       type = "Scope"
     }
   }
-
+/*
   required_resource_access {
     resource_app_id = "00000002-0000-0000-c000-000000000000"
 
@@ -44,7 +44,8 @@ resource "azuread_application" "server" {
       type = "Scope"
     }
   }
-  
+  */
+}
 /*
 oAuthPermissionId=$(az ad app show --id $serverApplicationId --query "oauth2Permissions[0].id" -o tsv)
 Add the permissions for the client application and server application components to use the oAuth2 communication flow using the az ad app permission add command. Then, grant permissions for the client application to communication with the server application using the az ad app permission grant command:
@@ -57,7 +58,7 @@ Try It
 az ad app permission add --id $clientApplicationId --api $serverApplicationId --api-permissions $oAuthPermissionId=Scope
 az ad app permission grant --id $clientApplicationId --api $serverApplicationId
   */
-}
+
 
 resource "azuread_application" "client" {
   name                       = "k8s azuread rbac server app"
