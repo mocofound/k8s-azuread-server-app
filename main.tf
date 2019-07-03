@@ -153,9 +153,6 @@ resource "azurerm_kubernetes_cluster" "k8sexample" {
     client_secret = "${var.client_secret}"
   }
 
-  tag {
-    Environment = "${var.environment}"
-      }
     role_based_access_control {
     enabled = true
     azure_active_directory {
