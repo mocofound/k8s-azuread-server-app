@@ -9,7 +9,7 @@ variable "azure_location" {
 
 variable "dns_prefix" {
   description = "DNS prefix for your cluster"
-  default = "k8s-"
+  default = "k8s-a"
 }
 
 variable "k8s_version" {
