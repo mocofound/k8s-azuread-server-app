@@ -19,7 +19,7 @@ resource "azuread_application" "server" {
   type                       = "webapp/api"
   group_membership_claims    = "All"
 
-  
+  #https://github.com/mjisaak/azure-active-directory/blob/master/README.md
   required_resource_access {
     resource_app_id = "00000003-0000-0000-c000-000000000000"
 
@@ -34,6 +34,11 @@ resource "azuread_application" "server" {
 
     resource_access {
       id = "06da0dbc-49e2-44d2-8312-53f166ab848a"
+      type = "Scope"
+    }
+    
+    resource_access {
+      id = "0e263e50-5827-48a4-b97c-d940288653c7"
       type = "Scope"
     }
   }
