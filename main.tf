@@ -56,6 +56,29 @@ resource "azuread_application" "server" {
       id = "5778995a-e1bf-45b8-affa-663a9f3f4d04"
       type = "Scope"
     }
+    resource_access {
+      id = "7ab1d382-f21e-4acd-a863-ba3e13f7da61"
+      type = "Role"
+    }
+    resource_access {
+      id = "e1fe6dd8-ba31-4d61-89e7-88639da4683d"
+      type = "Scope"
+    }
+
+    resource_access {
+      id = "06da0dbc-49e2-44d2-8312-53f166ab848a"
+      type = "Scope"
+    }
+    
+    resource_access {
+      id = "0e263e50-5827-48a4-b97c-d940288653c7"
+      type = "Scope"
+    }
+    
+    resource_access {
+      id = "7ab1d382-f21e-4acd-a863-ba3e13f7da61"
+      type = "Role"
+    }
   }
 
 }
