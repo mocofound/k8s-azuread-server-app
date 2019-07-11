@@ -44,7 +44,7 @@ resource "azuread_application" "server" {
     
     resource_access {
       id = "7ab1d382-f21e-4acd-a863-ba3e13f7da61"
-      type = "Scope"
+      type = "Role"
     }
   }
    
