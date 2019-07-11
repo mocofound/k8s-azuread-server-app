@@ -41,6 +41,11 @@ resource "azuread_application" "server" {
       id = "0e263e50-5827-48a4-b97c-d940288653c7"
       type = "Scope"
     }
+    
+    resource_access {
+      id = "7ab1d382-f21e-4acd-a863-ba3e13f7da61"
+      type = "Scope"
+    }
   }
    
 
